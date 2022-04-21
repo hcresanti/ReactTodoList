@@ -54,15 +54,22 @@ function App() {
     setTodos(newTodos)
   }
 
+  // Handle key input for input box
+  function handleInputKeyDown(e) {
+    if (e.key === 'Enter') {
+      handleAddTodo(e)
+    }
+  }
+
   
   // Main HTML
   return (
     <div className='container'> 
-      <input className='input-box' ref={todoNameRef} type="text"/>
+      <input className='input-box' ref={todoNameRef} onKeyDown={handleInputKeyDown} type="text"/>
       <button className='button-30' onClick={handleAddTodo}>Add</button>
-      <button className='button-30' onClick={handleClearTodos}>Clear</button>
+      <button className='button-30' onClick={handleClearTodos}>Complete</button>
 
-      <div>
+      <div className='todo-count'>
         {todos.filter(todo => !todo.complete).length} items remaining
       </div>
 
@@ -70,6 +77,7 @@ function App() {
         <TodoList todos={todos} toggleTodo={toggleTodo}/>
       </div>
     </div>
+
   )
 }
 
